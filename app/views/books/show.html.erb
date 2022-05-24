@@ -1,0 +1,46 @@
+<% if flash[:notice] %>
+  <p id="notice">
+    <%= flash[:notice] %>
+  </p>
+<% end %>
+
+<div class="container px-5 px-sm-0">
+  <div class="row" >
+    <div class="col-md-3">
+      <%= render 'list', book: @book,user: @users %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <h1>Book detail</h1>
+      <table class="table">
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span>
+                <%= image_tag @books.user.get_profile_image(100,100) %><br>
+                <%= link_to @users.name, user_path(@users.id) %>
+              </span>
+            </td>
+            <td>
+              <span>
+                <%= link_to @books.title, book_path(@books.id) %>
+              </span>
+            </td>
+            <td>
+              <span><%= @books.body %></span>
+            </td>
+            <td>
+              <% if@books.user == current_user %>
+                <%= link_to "Edit", edit_book_path(@books), class: "btn btn-sm btn-success" %>
+                <%= link_to "Destroy", destroy_book_path(@books),method: :delete, class: "btn btn-sm btn-danger","data-confirm" => "本当に削除しますか？" %>
+              <% end %>
+            </td>
+            <td>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
